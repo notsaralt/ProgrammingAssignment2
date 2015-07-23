@@ -14,9 +14,7 @@
 ##               u$get() retrieves 'x'.
 ##               u$getsolve() retrieves the matrix inverse of 'x', if it has been set by calling cacheSolve(u)
 ##
-## If cacheSolve(u) has not been called, the u$getsolve() returns NULL.
-
-
+## If cacheSolve(u) has not been called, then u$getsolve() returns NULL.
 
 makeCacheMatrix <- function(x = matrix()) {
   ## 'm' holds the inverse of the matrix x, initialize to NULL.
@@ -41,12 +39,11 @@ makeCacheMatrix <- function(x = matrix()) {
 
 
 
+## Return the inverse of 'u$get()$, where 'u' is an object created by 'makeCacheMatrix'.
+## If this is the first time calling 'cacheSolve' on 'u', the inverse is cached in 'u' so that it may be
+## retrieved by 'u$getsolve()'.
+## Subsequent calls to 'u$getsolve()' will retrieve the cached inverse, so that the inverse does not need to be computed again.
 cacheSolve <- function(u, ...) {
-  ## Return the inverse of 'u$get()$, where 'u' is an object created by 'makeCacheMatrix'.
-  ## If this is the first time calling 'cacheSolve' on 'u', the inverse is cached in 'u' so that it may be
-  ## retrieved by 'u$getsolve()'.
-  ## Subsequent calls to 'u$getsolve()' will retrieve the cached inverse, so that the inverse does not need to be computed again.
-  
   ## check to see if the inverse is already cached, and, if so, return it
   m <- u$getsolve()
   if(!is.null(m)) {
